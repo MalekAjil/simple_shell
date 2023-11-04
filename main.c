@@ -6,7 +6,7 @@
  * @cmd: cmd array
  * Return: status
  */
-int exe(char *cmdstr, char *cmd[])
+int exe(char **cmds, char **cmd, char **av, char **env)
 {
 	pid_t pid;
 	int stat;
@@ -19,9 +19,9 @@ int exe(char *cmdstr, char *cmd[])
 	}
 	else if (pid == 0)
 	{
-		if (execv(cmdstr, cmd) == -1)
+		if (execve(cmds[0], cmd, env) == -1)
 		{
-			printf("./shell: %s: command not found", cmdstr);
+			printf("%s: %s: command not found", av[0], cmds[0]);
 			return (1);
 		}
 	}
@@ -33,6 +33,7 @@ int exe(char *cmdstr, char *cmd[])
 	}
 	return (0);
 }
+
 /**
  * main - Entry point
  * @ac: arguments count
@@ -42,33 +43,26 @@ int exe(char *cmdstr, char *cmd[])
 int main(int ac, char **av, char **env)
 {
 	char *line = NULL;
-	char *cmd[] = {"/bin/ls", NULL};
-	lst_cmd *cmdh = NULL;
+	char *cmd[] = {"-l", NULL};
+	char **cmds = NULL;
 	size_t n = 0;
 	ssize_t count = 0;
-	int wcount = 0;
+	int wcount = 0, i = 0;
 
 	printf("($) ");
-	while (1)
+	while ((count = getline(&line, &n, stdin)) != -1)
 	{
-		count = getline(&line, &n, stdin);
-		if (count == -1)
-			break;
-		wcount = str_to_list(line, &cmdh);
-		if (wcount > 1)
-			printf("Too many arguments");
-		else if (wcount == 1)
+		cmds = str_to_words(line, &wcount);
+		if (cmds != NULL)
 		{
-			if (exe(cmdh->cmd, cmd) == 1)
-			{
-				exit(1);
-			}
+			exe(cmds, cmd, av, env);
 		}
 		else
 			printf("Error, No command");
 		printf("\n($) ");
-		wcount = 0;
-		cmdh = NULL;
+		for (i = 0; i < wcount; i++)
+			free(cmds[i]);
+		free(cmds);
 	}
 	if (ac != 1 && av == NULL && env == NULL)
 		return (1);
