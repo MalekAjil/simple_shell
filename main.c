@@ -68,7 +68,7 @@ int main(int ac, char **av, char **env)
 			exe(cmds, av, env);
 		}
 		else
-			write(2, "Error, No command", 20);
+			write(2, "Error, No command", 17);
 		write(1, "\n($) ", 5);
 		free(cmds);
 	}
