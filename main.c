@@ -2,14 +2,16 @@
 
 /**
  * exe - execute the command
- * @cmdstr: the command to be executed
- * @cmd: cmd array
- * Return: status
+ * @cmds: the command to be executed
+ * @av: argument value
+ * @env: environment
+ * Return: 0 on success, 1 on failure
  */
 int exe(char **cmds, char **av, char **env)
 {
 	pid_t pid;
 	int stat;
+	char c;
 
 	pid = fork();
 	if (pid < 0)
@@ -21,7 +23,9 @@ int exe(char **cmds, char **av, char **env)
 	{
 		if (execve(cmds[0], cmds, env) == -1)
 		{
-			printf("%s: %s: command not found", av[0], cmds[0]);
+			write(2, av[0], 20);
+			write(2, cmds[0], 20);
+			write(2, ": command not found", 18);
 			return (1);
 		}
 	}
@@ -29,7 +33,12 @@ int exe(char **cmds, char **av, char **env)
 	{
 		waitpid(pid, &stat, 0);
 		if (WIFEXITED(stat) && WEXITSTATUS(stat) != 0)
-			printf("command faild with status: %d\n", WEXITSTATUS(stat));
+		{
+			write(2, "command faild with status: ", 28);
+			c = '0' + WEXITSTATUS(stat);
+			write(2, &c, 1);
+			write(2, "\n", 1);
+		}
 	}
 	return (0);
 }
@@ -38,7 +47,8 @@ int exe(char **cmds, char **av, char **env)
  * main - Entry point
  * @ac: arguments count
  * @av: arguments values
- * Return: always 0 (success)
+ * @env: environment
+ * Return: 0 (success), 1 (failure)
  */
 int main(int ac, char **av, char **env)
 {
@@ -46,9 +56,9 @@ int main(int ac, char **av, char **env)
 	char **cmds = NULL;
 	size_t n = 0;
 	ssize_t count = 0;
-	int wcount = 0, i = 0;
+	int wcount = 0;
 
-	printf("($) ");
+	write(1, "($) ", 4);
 	while ((count = getline(&line, &n, stdin)) != -1)
 	{
 		cmds = str_to_words(line, &wcount);
@@ -58,9 +68,7 @@ int main(int ac, char **av, char **env)
 		}
 		else
 			printf("Error, No command");
-		printf("\n($) ");
-		for (i = 0; i < wcount; i++)
-			free(cmds[i]);
+		write(1, "\n($) ", 5);
 		free(cmds);
 	}
 	if (ac != 1 && av == NULL && env == NULL)
