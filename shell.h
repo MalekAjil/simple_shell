@@ -9,6 +9,11 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
+#define MAX_COMMAND_LENGTH 100
+#define MAX_PATH_LENGTH 100
+#define MAX_ARGUMENTS 10
+
+
 /**
  * struct lst_cmd - singly linked list to store command and arguments
  * @n: the number of node
@@ -24,4 +29,7 @@ typedef struct lst_cmd
 
 char **str_to_words(char *str, int *c);
 int str_len(char *str);
+int cmd_exists(char *command);
+int main(void);
+
 #endif
