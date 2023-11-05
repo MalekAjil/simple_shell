@@ -22,8 +22,6 @@ typedef struct lst_cmd
 	struct lst_cmd *next;
 } lst_cmd;
 
-int str_to_list(char *str, lst_cmd **head);
-void free_list(lst_cmd *head);
-
 char **str_to_words(char *str, int *c);
+int str_len(char *str);
 #endif

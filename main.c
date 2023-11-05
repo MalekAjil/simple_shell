@@ -23,9 +23,10 @@ int exe(char **cmds, char **av, char **env)
 	{
 		if (execve(cmds[0], cmds, env) == -1)
 		{
-			write(2, av[0], 20);
-			write(2, cmds[0], 20);
-			write(2, ": command not found", 18);
+			write(2, av[0], str_len(av[0]));
+			write(2, ": ", 2);
+			write(2, cmds[0], str_len(cmds[0]));
+			write(2, ": command not found", 20);
 			return (1);
 		}
 	}
@@ -67,7 +68,7 @@ int main(int ac, char **av, char **env)
 			exe(cmds, av, env);
 		}
 		else
-			printf("Error, No command");
+			write(2, "Error, No command", 20);
 		write(1, "\n($) ", 5);
 		free(cmds);
 	}
