@@ -21,6 +21,8 @@ int main(int ac, char **av, char **env)
 		cmds = str_to_words(line, &wcount);
 		if (cmds != NULL)
 		{
+			if (str_cmp(cmds[0], "exit"))
+				exit(0);
 			exe(cmds, av, env);
 		}
 		else

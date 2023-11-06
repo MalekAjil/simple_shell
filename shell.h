@@ -29,6 +29,7 @@ typedef struct lst_cmd
 
 char **str_to_words(char *str, int *c);
 int str_len(char *str);
+int str_cmp(char *str1, char *str2);
 int cmd_exists(char *command);
 int exe(char **cmds, char **av, char **env);
 
