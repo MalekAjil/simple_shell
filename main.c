@@ -45,6 +45,29 @@ int exe(char **cmds, char **av, char **env)
 }
 
 /**
+* cmd_exists - func to check if command exist
+* @command: pointing to an array of command.
+* Return: return 1 if fails, and 0 otherwise.
+*/
+int cmd_exists(char *command)
+{
+	char *path = getenv("PATH");
+	char pathCopy[MAX_PATH_LENGTH];
+	char commandPath[MAX_PATH_LENGTH];
+	char *pathToken = strtok(pathCopy, ":");
+
+	strcpy(pathCopy, path);
+	while (pathToken != NULL)
+	{
+		sprintf(commandPath, "%s/%s", pathToken, command);
+		if (access(commandPath, F_OK) == 0)
+			return (1);
+		pathToken = strtok(NULL, ":");
+	}
+	return (0);
+}
+
+/**
  * main - Entry point
  * @ac: arguments count
  * @av: arguments values
@@ -63,7 +86,7 @@ int main(int ac, char **av, char **env)
 	while ((count = getline(&line, &n, stdin)) != -1)
 	{
 		cmds = str_to_words(line, &wcount);
-		if (cmds != NULL)
+		if (cmds != NULL && cmd_exists(cmds[0]))
 		{
 			exe(cmds, av, env);
 		}
