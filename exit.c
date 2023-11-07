@@ -11,13 +11,16 @@ int exit_shell(void)
 
 	while (1)
 	{
-		printf ("$)";
+		char prompt[] = "$"
+		write(STDOUT_FILENO, prompt, strlen(prompt));
 		fgets(command, sizeof(command), stdin);
 		command[strcspn(command, "\n")] = '\0';
-	if (strcmp(command, "exit") == 0) 
-	{
-		printf ("...\n");
+	if (strcmp(command, "exit") == 0)
+		{
+		char message[] = "....\n"
+		write (STDOUT_FILENO, meassage, strlen(message));
 		break;
+		}
 	}
 	return ();
 }
