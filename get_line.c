@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
-*ssize_t get_line - reads buffer from the stream
+*get_line - reads buffer from the stream
 *@lineptr: pointer to the line
-*@n: parameter for number
-*@strem: array for the buffer
+*@n: parameter for number to take input
+*@stream: array for the buffer
 *
-*Return: return number of characters or - 1 when fail.
+*Return: return number of characters or - 1 on failure.
 */
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 {
@@ -18,23 +18,21 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 
 	if (!lineptr || !n || !stream)
 	return (-1);
-
 	if (*n == 0)
 	*n = 100;
-
 	if (bytes_read <= 0)
 	{
 		bytes_read = read(fileno(stream), buf, MAX_BUFFER_SIZE);
 
 	if (bytes_read < 0)
 	return (-1);
-
-	else if (bytes_read == 0)
+	else if
+		(bytes_read == 0)
 	return (-1);
 		buf_index = 0;
 	}
-
-	while (buf_index < bytes_read && buf[buf_index] != '\n')
+	while
+		(buf_index < (size_t)bytes_read && buf[buf_index] != '\n')
 	{
 		if (line_length + 1 >= *n)
 		{
@@ -48,7 +46,8 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	}
 	line[line_length] = '\0';
 	buf_index++;
-
-	if (buf_index >= bytes_read), bytes_read = 0;
-	return (line length);
+	if ((ssize_t)buf_index >=
+			bytes_read)
+		bytes_read = 0;
+	return (line_length);
 }
