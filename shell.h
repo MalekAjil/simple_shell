@@ -33,5 +33,6 @@ int str_cmp(char *str1, char *str2);
 int cmd_exists(char *command);
 int exe(char **cmds, char **av, char **env);
 ssize_t get_line(char **lineptr, size_t *n,     FILE *stream);
+int exit_shell(void);
 
 #endif

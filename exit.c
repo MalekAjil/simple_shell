@@ -1,23 +1,23 @@
-#include "shell. h" 
+#include "shell.h" 
 
 /**
-*exit - function to exit shell
+*exit_shell - function to exit shell
 *
 *Return: return 0.
 */
-int exit(void)
+int exit_shell(void)
 {
 	char command[100];
 
 	while (1)
 	{
-		printf "$";
+		printf ("$)";
 		fgets(command, sizeof(command), stdin);
 		command[strcspn(command, "\n")] = '\0';
-	if (strcmp(command, "exit") == 0) {
-		printf "...\n";
+	if (strcmp(command, "exit") == 0) 
+	{
+		printf ("...\n");
 		break;
 	}
-}
-	return (0) ;
+	return ();
 }
