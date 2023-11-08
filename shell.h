@@ -35,5 +35,7 @@ int exe(char **cmds, char **av, char **env);
 int reallocate_memory(char **lineptr, size_t *n);
 ssize_t read_line(FILE *stream, char *line, size_t n);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
+void exit_shell(int status);
+int exit(void);
 
 #endif
