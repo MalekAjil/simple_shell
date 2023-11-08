@@ -14,9 +14,9 @@ int main(int ac, char **av, char **env)
 	size_t n = 0;
 	ssize_t count = 0;
 	int wcount = 0;
-	char* path = getenv("PATH");
+	char *path = getenv("PATH");
 
-	printf("%s\n%s", path, env[0]);
+	printf("%s\n%s\n", path, env[0]);
 	write(1, "($) ", 4);
 	while ((count = get_line(&line, &n, stdin)) != -1)
 	{
