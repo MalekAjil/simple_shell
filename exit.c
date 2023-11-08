@@ -1,4 +1,4 @@
-#include "shell.h" 
+#include "shell.h"
 
 /**
 *exit_shell - function to exit shell
@@ -11,13 +11,14 @@ int exit_shell(void)
 
 	while (1)
 	{
-		printf ("$)";
+		printf("$)");
 		fgets(command, sizeof(command), stdin);
 		command[strcspn(command, "\n")] = '\0';
-	if (strcmp(command, "exit") == 0) 
-	{
-		printf ("...\n");
-		break;
+		if (strcmp(command, "exit") == 0)
+		{
+			printf("...\n");
+			break;
+		}
 	}
-	return ();
+	return (0);
 }

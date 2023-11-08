@@ -14,15 +14,20 @@ int main(int ac, char **av, char **env)
 	size_t n = 0;
 	ssize_t count = 0;
 	int wcount = 0;
+	char* path = getenv("PATH");
 
+	printf("%s\n%s", path, env[0]);
 	write(1, "($) ", 4);
-	while ((count = getline(&line, &n, stdin)) != -1)
+	while ((count = get_line(&line, &n, stdin)) != -1)
 	{
 		cmds = str_to_words(line, &wcount);
 		if (cmds != NULL)
 		{
 			if (str_cmp(cmds[0], "exit"))
+			{
 				exit(0);
+				break;
+			}
 			exe(cmds, av, env);
 		}
 		else
