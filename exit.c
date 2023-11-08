@@ -21,14 +21,14 @@ int exit_shell(void)
 			printf("...\n");
 			break;
 		}
-		prompt[] = "$";
+		prompt = "$";
 		write(STDOUT_FILENO, prompt, strlen(prompt));
 		fgets(command, sizeof(command), stdin);
 		command[strcspn(command, "\n")] = '\0';
 		if (strcmp(command, "exit") == 0)
 		{
 			message = "....\n";
-			write(STDOUT_FILENO, meassage, strlen(message));
+			write(STDOUT_FILENO, message, strlen(message));
 			break;
 		}
 	}
