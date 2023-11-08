@@ -1,12 +1,11 @@
 #include "shell.h"
 
 /**
-*get_line - reads buffer from the stream
-*@lineptr: pointer to the line
-*@n: parameter for number to take input
-*@stream: array for the buffer
-*
-*Return: return number of characters or - 1 on failure.
+* get_line - reads buffer from the stream
+* @lineptr: pointer to the line
+* @n: parameter for number to take input
+* @stream: array for the buffe
+* Return: return number of characters or -1 on failure.
 */
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 {
