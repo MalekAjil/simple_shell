@@ -21,6 +21,7 @@ int main(int ac, char **av, char **env)
 	while ((count = get_line(&line, &n, stdin)) != -1)
 	{
 		cmds = str_to_words(line, &wcount);
+		printf("%s\n", line);
 		if (cmds != NULL)
 		{
 			if (str_cmp(cmds[0], "exit"))

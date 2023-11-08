@@ -10,38 +10,27 @@
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 {
 	static char buf[MAX_BUFFER_SIZE];
-	static size_t buf_index = (0);
-	static ssize_t bytes_read = (0);
-	size_t line_length = (0);
-	char *line = *lineptr;
+	static size_t buf_index = 0;
+	static ssize_t bytes_read = 0;
+	char *line = NULL;
 
-	if (!lineptr || !n || !stream)
+	if (!n || !stream)
 		return (-1);
 	if (*n == 0)
 		*n = 100;
+	bytes_read = read(fileno(stream), buf, MAX_BUFFER_SIZE);
 	if (bytes_read <= 0)
-	{
-		bytes_read = read(fileno(stream), buf, MAX_BUFFER_SIZE);
+		return (-1);
 
-		if (bytes_read <= 0)
-			return (-1);
-		buf_index = 0;
-	}
+	line = malloc(sizeof(char) * bytes_read);
+	if (line == NULL)
+		return (-1);
 	while (buf_index < (size_t)bytes_read && buf[buf_index] != '\n')
 	{
-		if (line_length + 1 >= *n)
-		{
-			*n *= 2;
-			*lineptr = realloc(*lineptr, *n);
-			line = *lineptr;
-			if (!line)
-				return (-1);
-		}
-		line[line_length++] = buf[buf_index++];
+		line[buf_index] = buf[buf_index];
+		buf_index++;
 	}
-	line[line_length] = '\0';
-	buf_index++;
-	if ((ssize_t)buf_index >= bytes_read)
-		bytes_read = 0;
-	return (line_length);
+	line[buf_index] = '\n';
+	*lineptr = line;
+	return (buf_index);
 }
