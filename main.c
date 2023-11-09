@@ -14,6 +14,8 @@ int main(int ac, char **av, char **env)
 	size_t n = 0;
 	ssize_t count = 0;
 	int wcount = 0;
+	char *variable = "NEW_VARIABLE";
+	char *value = "NEW_VALUE";
 
 	write(1, "($) ", 4);
 	while ((count = getline(&line, &n, stdin)) != -1)
@@ -32,5 +34,14 @@ int main(int ac, char **av, char **env)
 	}
 	if (ac != 1 && av == NULL && env == NULL)
 		return (1);
+	if (set_env(variable, value) != -1)
+	{
+		printf("New Enviroment Set");
+	}
+	print_env();
+	if (unset_env("NEW_VARIABLE") != -1)
+	{
+		printf("Enviroment Unset");
+	}
 	return (0);
 }

@@ -37,5 +37,9 @@ ssize_t read_line(FILE *stream, char *line, size_t n);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
 void exit_shell(int status);
 int exit(void);
+void print_Error(const char *message);
+int set_env(const char *variable, const char *value);
+int unset_env(const char *variable);
+void print_env(void);
 
 #endif
