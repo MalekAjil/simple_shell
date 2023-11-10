@@ -37,3 +37,27 @@ int str_cmp(char *str1, char *str2)
 	}
 	return (1);
 }
+
+/**
+ * str_cpy - copy string
+ * @dist: distenation string
+ * @src: source string
+ * Return: number of copied charachters
+ */
+int str_cpy(char *dist, char *src)
+{
+	int n = 0, i = 0;
+
+	if (src == NULL)
+		return (-1);
+	n = str_len(src);
+	dist = malloc(sizeof(char) * n);
+	if (dist == NULL)
+		return (-1);
+	while (src[i] != '\0')
+	{
+		dist[i] = src[i];
+		i++;
+	}
+	return (n);
+}

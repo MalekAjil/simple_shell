@@ -30,6 +30,7 @@ typedef struct lst_cmd
 char **str_to_words(char *str, int *c);
 int str_len(char *str);
 int str_cmp(char *str1, char *str2);
+int str_cpy(char *dist, char *src);
 int cmd_exists(char *command);
 int exe(char **cmds, char **av, char **env);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);

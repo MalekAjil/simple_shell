@@ -35,7 +35,9 @@ int main(int ac, char **av, char **env)
 			write(2, "Error, No command", 17);
 		write(1, "\n($) ", 5);
 		free(cmds);
+		line = NULL;
 	}
+	free(line);
 	if (ac != 1 && av == NULL && env == NULL)
 		return (1);
 	return (0);

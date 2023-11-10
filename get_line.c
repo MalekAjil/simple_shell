@@ -25,12 +25,9 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	line = malloc(sizeof(char) * bytes_read);
 	if (line == NULL)
 		return (-1);
-	while (buf_index < (size_t)bytes_read && buf[buf_index] != '\n')
-	{
-		line[buf_index] = buf[buf_index];
-		buf_index++;
-	}
-	line[buf_index] = '\n';
-	*lineptr = line;
+	printf("%s\n", buf);
+	
+	if ((buf_index = str_cpy(*lineptr, buf)) > 0)
+		printf("%lu, %s, %s\n", buf_index, buf, *lineptr);
 	return (buf_index);
 }
