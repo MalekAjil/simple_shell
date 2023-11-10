@@ -14,6 +14,8 @@ int main(int ac, char **av, char **env)
 	size_t n = 0;
 	ssize_t count = 0;
 	int wcount = 0;
+	char *variable = "NEW_VARIABLE";
+	char *value = "NEW_VALUE";
 	char *path = getenv("PATH");
 
 	printf("%s\n%s\n", path, env[0]);
@@ -40,5 +42,14 @@ int main(int ac, char **av, char **env)
 	free(line);
 	if (ac != 1 && av == NULL && env == NULL)
 		return (1);
+	if (set_env(variable, value) != -1)
+	{
+		printf("New Enviroment Set");
+	}
+	print_env();
+	if (unset_env("NEW_VARIABLE") != -1)
+	{
+		printf("Enviroment Unset");
+	}
 	return (0);
 }
