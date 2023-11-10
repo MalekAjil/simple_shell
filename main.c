@@ -16,15 +16,21 @@ int main(int ac, char **av, char **env)
 	int wcount = 0;
 	char *variable = "NEW_VARIABLE";
 	char *value = "NEW_VALUE";
+	char *path = getenv("PATH");
 
+	printf("%s\n%s\n", path, env[0]);
 	write(1, "($) ", 4);
-	while ((count = getline(&line, &n, stdin)) != -1)
+	while ((count = get_line(&line, &n, stdin)) != -1)
 	{
 		cmds = str_to_words(line, &wcount);
+		printf("%s\n", line);
 		if (cmds != NULL)
 		{
 			if (str_cmp(cmds[0], "exit"))
+			{
 				exit(0);
+				break;
+			}
 			exe(cmds, av, env);
 		}
 		else

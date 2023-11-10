@@ -41,5 +41,7 @@ void print_Error(const char *message);
 int set_env(const char *variable, const char *value);
 int unset_env(const char *variable);
 void print_env(void);
+ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
+int exit_shell(void);
 
 #endif
