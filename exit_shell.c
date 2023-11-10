@@ -13,7 +13,7 @@ void exit_shell(int status)
 *exit -  main function to handle exit
 *Return: rturn 0.
 */
-int exit(void)
+int exit_(void)
 {
 	char command[] = "exit 2";
 	char *command_name;
@@ -28,7 +28,7 @@ int exit(void)
 			status = atoi(status_str);
 			exit_shell(status);
 		}
-	else
+		else
 		{
 			write(2, "Invalid command: Usage: exit status\n", 34);
 		}

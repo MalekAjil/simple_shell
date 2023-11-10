@@ -14,7 +14,7 @@ int set_env(const char *variable, const char *value)
 
 	if (i == -1)
 	{
-		printError("Error Setting Enviroment");
+		print_Error("Error Setting Enviroment");
 	}
 	return (i);
 }
@@ -30,7 +30,7 @@ int unset_env(const char *variable)
 
 	if (i == -1)
 	{
-		printError("Error Unsetting Enviroment");
+		print_Error("Error Unsetting Enviroment");
 	}
 	return (i);
 }
@@ -39,17 +39,18 @@ int unset_env(const char *variable)
  */
 void print_env(void)
 {
-	char **environ;
+	char **environ = NULL, **env;
 
-	for (char **env = environ; *env != NULL; env++)
+	for (env = environ; *env != NULL; env++)
 	{
-		write("%s\n", *env);
+		write(1, *env, str_len(*env));
+	}
 }
 /**
  *print_error - function to print error message
  *@message: message to be outputted
  */
-void print_Error(const char *message)
+void print_Error(char *message)
 {
-	write("stderr, %s\n", message);
+	write(2, message, str_len(message));
 }

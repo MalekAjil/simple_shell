@@ -1,7 +1,6 @@
 #include "shell.h"
 
 /**
-<<<<<<< HEAD
  *reallocate_memory - allocate memory to the pointer
  *@lineptr: pointer to the line input
  *@n: parameter to take in size
@@ -93,14 +92,15 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 		bytes_read = 0;
 	}
 	return (line_length);
-=======
+}
+/**
 * get_line - reads buffer from the stream
 * @lineptr: pointer to the line
 * @n: parameter for number to take input
 * @stream: array for the buffe
 * Return: return number of characters or -1 on failure.
 */
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
+ssize_t get_line1(char **lineptr, size_t *n, FILE *stream)
 {
 	static char buf[MAX_BUFFER_SIZE];
 	static size_t buf_index = 0;
@@ -123,5 +123,4 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	if ((buf_index = str_cpy(*lineptr, buf)) > 0)
 		printf("%lu, %s, %s\n", buf_index, buf, *lineptr);
 	return (buf_index);
->>>>>>> origin
 }
