@@ -24,6 +24,6 @@ typedef struct lst_cmd
 } lst_cmd;
 */
 
-int main(int ac, char **argv);
+int main(void);
 
 #endif

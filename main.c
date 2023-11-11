@@ -7,18 +7,53 @@
  *
  * Return: 0 (success), 1 (failure)
  */
-int main(int ac, char **argv)
+int main(void)
 {
-	char *prompt = "($)";
-	char *lineptr;
+	char *full_command = NULL, *copy_command = NULL;
+	char *token;
+	char **argv;
+	int i;
+	int num_token = 0;
 	size_t n = 0;
+	ssize_t nchars_read;
+	const char *delim = " \n";
 
-	(void) ac; (void)argv;
+	printf("$ ");
+	nchars_read = getline(&full_command, &n, stdin);
+	copy_command = malloc(sizeof(char) * nchars_read);
+	if (copy_command == NULL)
+	{
+		perror("tsh: memory allocation error");
+		return (-1);
+	}
+	strcpy(copy_command, full_command);
+	if (nchars_read == -1)
+	{
+		printf("Exiting shell.....\n");
+		return (-1);
+	}
+	else
+	{
+	token = strtok(full_command, delim);
+	while (token != NULL)
+	{
+		num_token++;
+		token = strtok(NULL, delim);
+	}
+	num_token++;
+	argv = malloc(sizeof(char *) * num_token);
+	token = strtok(copy_command, delim);
+	for(i = 0; token != NULL; i++)
+	{
+		argv[i] = malloc(sizeof(char) * strlen(token));
+		strcpy(argv[i], token);
+		token = strtok(NULL, delim);
+	}
+	argv[i] = NULL;
 
-	printf("%s", prompt);
-	printf("%s\n", lineptr);
-	getline(&lineptr, &n, stdin);
-
-	free(lineptr);
+	free(full_command);
+	free(copy_command);
+	free(argv);
+	}
 	return (0);
 }
