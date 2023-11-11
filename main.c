@@ -23,11 +23,35 @@ int main(void)
 	copy_command = malloc(sizeof(char) * nchars_read);
 	if (copy_command == NULL)
 	{
+<<<<<<< HEAD
 		perror("tsh: memory allocation error");
 		return (-1);
 	}
 	strcpy(copy_command, full_command);
 	if (nchars_read == -1)
+=======
+		cmds = str_to_words(line, &wcount);
+		printf("%s\n", line);
+		if (cmds != NULL)
+		{
+			if (str_cmp(cmds[0], "exit"))
+			{
+				exit(0);
+				break;
+			}
+			exe(cmds, av, env);
+		}
+		else
+			write(2, "Error, No command", 17);
+		write(1, "\n($) ", 5);
+		free(cmds);
+		line = NULL;
+	}
+	free(line);
+	if (ac != 1 && av == NULL && env == NULL)
+		return (1);
+	if (set_env(variable, value) != -1)
+>>>>>>> origin
 	{
 		printf("Exiting shell.....\n");
 		return (-1);
