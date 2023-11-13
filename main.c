@@ -9,7 +9,7 @@
  */
 int main(int ac, char **argv)
 {
-	char *prompt = ("$");
+	char *prompt = "($)";
 	char *token;
 	char *lineptr = NULL, *lineptr_copy = NULL;
 	int i;
@@ -23,8 +23,7 @@ int main(int ac, char **argv)
 	while (1)
 	{
 	printf("%s", prompt);
-	nchars_read = getline(&lineptr, &n, stdin);
-	
+	nchars_read = getline(&lineptr, &n, stdin);	
 	if (nchars_read == -1)
 	{
 		printf("Exiting shell");
@@ -37,7 +36,6 @@ int main(int ac, char **argv)
 		return (-1);
 	}
 	strcpy(lineptr_copy, lineptr);
-
 	token = strtok(lineptr, delim);
 	while (token != NULL)
 	{

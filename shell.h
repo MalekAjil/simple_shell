@@ -26,5 +26,6 @@ typedef struct lst_cmd
 
 int main(int ac, char **argv);
 void exec(char **argv);
+char *location(char *command);
 
 #endif

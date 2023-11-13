@@ -6,14 +6,15 @@
  */
 void exec(char **argv)
 {
-	char *command = NULL;
+	char *command = NULL, *actual_command = NULL;
 
 	if (argv)
 	{
 		command = argv[0];
-		if (execve(command, argv, NULL) == -1)
+		actual_command = location(command);
+		if (execve(actual_command, argv, NULL) == -1)
 		{
 			perror("Error:");
-		};
+		}
 	}
 }
