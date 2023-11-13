@@ -20,7 +20,7 @@ int main(int ac, char **av, char **env)
 
 	printf("%s\n%s\n", path, env[0]);
 	write(1, "($) ", 4);
-	while ((count = get_line(&line, &n, stdin)) != -1)
+	while ((count = getline(&line, &n, stdin)) != -1)
 	{
 		cmds = str_to_words(line, &wcount);
 		printf("%s\n", line);
