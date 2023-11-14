@@ -42,5 +42,6 @@ void print_Error(char *message);
 int set_env(const char *variable, const char *value);
 int unset_env(const char *variable);
 void print_env(void);
+char *location(char *command);
 
 #endif
