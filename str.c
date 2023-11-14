@@ -59,5 +59,6 @@ int str_cpy(char *dist, char *src)
 		dist[i] = src[i];
 		i++;
 	}
+	dist[i] = '\0';
 	return (n);
 }
