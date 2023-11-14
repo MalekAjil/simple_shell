@@ -47,7 +47,7 @@ void print_env(void)
 	}
 }
 /**
- *print_error - function to print error message
+ *print_Error - function to print error message
  *@message: message to be outputted
  */
 void print_Error(char *message)

@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
-*exit_shell - function to exit shell
-*@status: status of the shell after command
+* exit_shell - function to exit shell
+* @status: status of the shell after command
 */
 void exit_shell(int status)
 {
@@ -10,8 +10,8 @@ void exit_shell(int status)
 	_exit(status);
 }
 /**
-*exit -  main function to handle exit
-*Return: rturn 0.
+* exit_ -  main function to handle exit
+* Return: rturn 0.
 */
 int exit_(void)
 {

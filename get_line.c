@@ -33,13 +33,9 @@ ssize_t read_line(FILE *stream, char *line, size_t n)
 
 	bytes_read = fread(line, 1, n, stream);
 	if (bytes_read < 0)
-	{
-	return (-1);
-	}
+		return (-1);
 	else if (bytes_read == 0)
-	{
-	return (-1);
-	}
+		return (-1);
 	return (bytes_read);
 }
 /**
@@ -55,46 +51,34 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	ssize_t bytes_read = 0;
 	size_t buf_index = 0;
 	size_t line_length = 0;
+	int reallocated = 0;
 
 	if (!lineptr || !n || !stream)
-	{
 		return (-1);
-	}
 	if (*n == 0)
-	{
 		*n = 100;
-	}
 	if (bytes_read <= 0)
-	{
 		bytes_read = read_line(stream, buf, MAX_BUFFER_SIZE);
-	}
 	if (bytes_read < 0)
-	{
 		return (-1);
-	}
 	while (buf_index < (size_t)bytes_read && buf[buf_index] != '\n')
 	{
-	if (line_length + 1 >= *n)
-	{
-		int reallocated = reallocate_memory(lineptr, n);
-
-		if (reallocated == -1)
+		if (line_length + 1 >= *n)
 		{
-			return (-1);
+			reallocated = reallocate_memory(lineptr, n);
+			if (reallocated == -1)
+				return (-1);
 		}
-	}
-	(*lineptr)[line_length++] = buf[buf_index++];
+		(*lineptr)[line_length++] = buf[buf_index++];
 	}
 	(*lineptr)[line_length] = '\0';
 	buf_index++;
 	if (buf_index >= (size_t)bytes_read)
-	{
 		bytes_read = 0;
-	}
 	return (line_length);
 }
 /**
-* get_line - reads buffer from the stream
+* get_line1 - reads buffer from the stream
 * @lineptr: pointer to the line
 * @n: parameter for number to take input
 * @stream: array for the buffe
@@ -103,8 +87,8 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 ssize_t get_line1(char **lineptr, size_t *n, FILE *stream)
 {
 	static char buf[MAX_BUFFER_SIZE];
-	static size_t buf_index = 0;
-	static ssize_t bytes_read = 0;
+	static size_t buf_index;
+	static ssize_t bytes_read;
 	char *line = NULL;
 
 	if (!n || !stream)
@@ -119,8 +103,9 @@ ssize_t get_line1(char **lineptr, size_t *n, FILE *stream)
 	if (line == NULL)
 		return (-1);
 	printf("%s\n", buf);
-	
-	if ((buf_index = str_cpy(*lineptr, buf)) > 0)
+
+	buf_index = str_cpy(*lineptr, buf);
+	if (buf_index > 0)
 		printf("%lu, %s, %s\n", buf_index, buf, *lineptr);
 	return (buf_index);
 }

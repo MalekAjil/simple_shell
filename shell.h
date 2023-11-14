@@ -33,6 +33,9 @@ int str_cmp(char *str1, char *str2);
 int str_cpy(char *dist, char *src);
 int cmd_exists(char *command);
 int exe(char **cmds, char **av, char **env);
+int words_count(char *str);
+char **strtow(char *str);
+
 int reallocate_memory(char **lineptr, size_t *n);
 ssize_t read_line(FILE *stream, char *line, size_t n);
 ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
