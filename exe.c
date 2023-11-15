@@ -29,6 +29,7 @@ int exe(char **cmds, char **av, char **env)
 			write(2, ": command not found\n", 20);
 			return (1);
 		}
+		kill(getpid(), 0);
 	}
 	else
 	{
@@ -39,7 +40,6 @@ int exe(char **cmds, char **av, char **env)
 			c = '0' + WEXITSTATUS(stat);
 			write(2, &c, 1);
 			write(2, "\n", 1);
-			return (1);
 		}
 	}
 	return (0);
