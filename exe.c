@@ -26,7 +26,7 @@ int exe(char **cmds, char **av, char **env)
 			write(2, av[0], str_len(av[0]));
 			write(2, ": ", 2);
 			write(2, cmds[0], str_len(cmds[0]));
-			write(2, ": command not found", 20);
+			write(2, ": command not found\n", 20);
 			return (1);
 		}
 	}
@@ -39,6 +39,7 @@ int exe(char **cmds, char **av, char **env)
 			c = '0' + WEXITSTATUS(stat);
 			write(2, &c, 1);
 			write(2, "\n", 1);
+			return (1);
 		}
 	}
 	return (0);
