@@ -15,12 +15,12 @@ int main(int ac, char **av, char **env)
 	ssize_t count = 0;
 	int wcount = 0;
 
-	write(1, "($) ", 4);
 	while (1)
 	{
+		/*write(1, "($) ", 4);*/
 		count = getline(&line, &n, stdin);
 		if (count == -1)
-			_exit(0);
+			return (0);
 		cmds = str_to_words(line, &wcount);
 		if (cmds != NULL)
 		{
@@ -32,7 +32,6 @@ int main(int ac, char **av, char **env)
 		}
 		free(cmds);
 		line = NULL;
-		write(1, "($) ", 4);
 	}
 	free(line);
 	write(1, "\n", 1);
