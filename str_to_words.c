@@ -6,7 +6,7 @@
  * @count: words count
  * Return: the words array
  */
-char **str_to_words(char *str, int *count)
+char **str_to_words(char *str)
 {
 	char **words = NULL;
 	char *str1 = str;
@@ -34,6 +34,5 @@ char **str_to_words(char *str, int *count)
 		}
 	}
 	free(str1);
-	*count = c;
 	return (words);
 }

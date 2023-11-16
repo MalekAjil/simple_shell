@@ -6,7 +6,7 @@
  * 
  * Return: corresponding string
  */
-char* get_env(const char *name)
+char* get_env(char *name)
 {
 	int i = 0, res = 0;
 

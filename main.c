@@ -7,7 +7,7 @@
  */
 int main(void)
 {
-	char *line = NULL, *PATH = NULL, *dir = NULL, *tmp = NULL;
+	char *line = NULL, *PATH = NULL, *dir = NULL;
 	char **cmds = NULL;
 
 	signal(SIGINT, SIG_IGN);
@@ -28,7 +28,7 @@ int main(void)
 				free(line);
 				continue;
 			}
-			dir = get_path(cmd, PATH, tmp);
+			dir = get_path(cmds, PATH);
 			if (builtin(cmds, line) != 0)
 				continue;
 			_fork(cmds, line, dir);

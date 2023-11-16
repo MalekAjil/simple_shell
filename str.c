@@ -86,17 +86,17 @@ char* str_cat(char *dest, char *src)
 }
 
 /**
- * str_words - counts the number of words in string
+ * w_count - counts the number of words in string
  * @str: the string
  * Return: the number of words
  */
-int str_words(char *str)
+int w_count(char *str, char delim)
 {
 	int i = 0, flag = 1, count = 0;
 
 	for (i = 0; str[i]; i++)
 	{
-		if (str[i] != ' ' && flag == 1)
+		if (str[i] != delim && flag == 1)
 		{
 			count++;
 			flag = 0;
