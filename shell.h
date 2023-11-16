@@ -9,42 +9,29 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 
-#define MAX_COMMAND_LENGTH 100
-#define MAX_PATH_LENGTH 100
-#define MAX_ARGUMENTS 10
-#define MAX_BUFFER_SIZE 1024
+extern char **environ;
 
-/**
- * struct lst_cmd - singly linked list to store command and arguments
- * @n: the number of node
- * @cmd: the command string
- * @next: the pointer to the next node
- */
-typedef struct lst_cmd
-{
-	int n;
-	char *cmd;
-	struct lst_cmd *next;
-} lst_cmd;
-
-char **str_to_words(char *str, int *c);
+char **str_to_words(char *str);
 int str_len(char *str);
 int str_cmp(char *str1, char *str2);
-int str_cpy(char *dist, char *src);
-int cmd_exists(char *command);
+char *str_dup(char *src);
+int str_words(char *str);
 int exe(char **cmds, char **av, char **env);
 int words_count(char *str);
 char **strtow(char *str);
 
-int reallocate_memory(char **lineptr, size_t *n);
-ssize_t read_line(FILE *stream, char *line, size_t n);
-ssize_t get_line(char **lineptr, size_t *n, FILE *stream);
-void exit_shell(int status);
-int exit_(void);
-void print_Error(char *message);
+void free_cmds(char **cmds);
+ssize_t get_line(char *lineptr);
+char* get_path(char **cmds, char *line, char *path);
+int builtin(char **cmds, char *line);
+int _fork(char **cmds, char *line, char *path);
+
 int set_env(const char *variable, const char *value);
 int unset_env(const char *variable);
+char *get_env(const char *name);
 void print_env(void);
-char *location(char *command);
+void _puts(char *str);
+int _putchar(char c);
+char *str_set(char *str, char c, unsigned int n);
 
 #endif

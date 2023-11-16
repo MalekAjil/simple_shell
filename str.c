@@ -39,26 +39,70 @@ int str_cmp(char *str1, char *str2)
 }
 
 /**
- * str_cpy - copy string
- * @dist: distenation string
+ * str_dup - dupplicates the string
  * @src: source string
  * Return: number of copied charachters
  */
-int str_cpy(char *dist, char *src)
+char* str_dup(char *src)
 {
-	int n = 0, i = 0;
+	int i = 0;
+	char *dest = NULL;
 
 	if (src == NULL)
-		return (-1);
-	n = str_len(src);
-	dist = malloc(sizeof(char) * n);
-	if (dist == NULL)
-		return (-1);
+		return (NULL);
+	while (src[i] != '\0')
+		i++;
+	dest = malloc(sizeof(char) * (i + 1));
+	if (dest == NULL)
+		return (NULL);
 	while (src[i] != '\0')
 	{
-		dist[i] = src[i];
+		dest[i] = src[i];
 		i++;
 	}
-	dist[i] = '\0';
-	return (n);
+	dest[i] = '\0';
+	return (dest);
+}
+
+/**
+ * str_cat - concatenate two strings
+ * @dest: destination string
+ * @src: source string
+ * Return: concatenated string
+ */
+char* str_cat(char *dest, char *src)
+{
+	int i = 0, j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0')
+	{
+		dest[i] = src [j];
+		i++;
+		j++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+/**
+ * str_words - counts the number of words in string
+ * @str: the string
+ * Return: the number of words
+ */
+int str_words(char *str)
+{
+	int i = 0, flag = 1, count = 0;
+
+	for (i = 0; str[i]; i++)
+	{
+		if (str[i] != ' ' && flag == 1)
+		{
+			count++;
+			flag = 0;
+		}
+		if (str[i + 1] == ' ')
+			flag = 1;
+	}
+	return (count);
 }
