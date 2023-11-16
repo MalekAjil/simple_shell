@@ -33,6 +33,7 @@ char **str_to_words(char *str, int *count)
 				break;
 		}
 	}
+	free(str1);
 	*count = c;
 	return (words);
 }

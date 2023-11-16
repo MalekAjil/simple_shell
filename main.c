@@ -17,19 +17,30 @@ int main(int ac, char **av, char **env)
 
 	while (1)
 	{
-		/*write(1, "($) ", 4);*/
+		cmds = NULL;
+		if (isatty(0) == 1 && write(1, "($) ", 4) == -1)
+			exit(0);
 		count = getline(&line, &n, stdin);
 		if (count == -1)
-			return (0);
+		{
+			free(line);
+			if (isatty(0) != 0)
+				write(1, "\n", 1);
+			exit(0);
+		}
 		cmds = str_to_words(line, &wcount);
 		if (cmds != NULL)
 		{
 			if (str_cmp(cmds[0], "exit"))
 			{
-				_exit(0);
+				free(line);
+				free(cmds);
+				exit(0);
 			}
 			exe(cmds, av, env);
 		}
+		for (n = 0; cmds[n]; n++)
+			free(cmds[n]);
 		free(cmds);
 		line = NULL;
 	}

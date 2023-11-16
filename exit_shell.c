@@ -30,7 +30,7 @@ int exit_(void)
 		}
 		else
 		{
-			write(2, "Invalid command: Usage: exit status\n", 34);
+			write(2, "Invalid command: Usage: exit status\n", 36);
 		}
 	}
 	else
