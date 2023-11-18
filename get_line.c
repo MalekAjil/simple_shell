@@ -1,5 +1,6 @@
 #include "shell.h"
-/*
+
+/**
 * get_line - reads string from the stream
 * Return: return the line string.
 */

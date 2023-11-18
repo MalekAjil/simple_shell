@@ -23,9 +23,9 @@ int builtin(char **cmds, char *line)
 		{
 			st = str_to_num(cmds[1]);
 		}
-		free_cmds(cmds);		
+		free_cmds(cmds);
 		free(line);
 		exit(st);
 	}
-        return (0);
+	return (0);
 }

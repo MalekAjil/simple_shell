@@ -3,10 +3,9 @@
 /**
  * get_env - return the environ
  * @name: the environment string
- * 
  * Return: corresponding string
  */
-char* get_env(char *name)
+char *get_env(char *name)
 {
 	int i = 0, res = 0;
 
@@ -16,8 +15,8 @@ char* get_env(char *name)
 		if (!res)
 			return (environ[i]);
 		i++;
-	}		
-        return (NULL);
+	}
+	return (NULL);
 }
 
 /**
@@ -62,7 +61,7 @@ int _putchar(char c)
  * @n: number of bytes
  * Return: the char array
  */
-char* str_set(char *str, char c, unsigned int n)
+char *str_set(char *str, char c, unsigned int n)
 {
 	unsigned int i;
 

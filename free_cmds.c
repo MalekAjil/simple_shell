@@ -13,7 +13,7 @@ void free_cmds(char **cmds)
 		return;
 	while (cmds[i] != NULL)
 		i++;
-	while(cmds[i])
+	while (cmds[i])
 	{
 		free(cmds[i]);
 		i--;
