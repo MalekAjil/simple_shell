@@ -21,7 +21,6 @@ int _fork(char **cmds, char *line, char *path)
 	if (pid == 0)
 	{
 		res =  execve(path, cmds, environ);
-		printf("%d\n", res);
 		if (res == -1)
 		{
 			perror(cmds[0]);
