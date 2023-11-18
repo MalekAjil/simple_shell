@@ -6,7 +6,7 @@
  * @line: the line pointer
  * Return: the full  path
  */
-char* get_path(char **cmds, char *line)
+char *get_path(char **cmds, char *line)
 {
 	char *tk = NULL, *path = NULL, *tmp = NULL, *cc = NULL;
 	static char temp[256];
@@ -65,5 +65,5 @@ char *str_cat3(char *str1, char *str2, char *str3)
 	str_cat(str1, "/");
 	str_cat(str1, str2);
 	str1[i - 1] = '\0';
-	return(str1);
+	return (str1);
 }

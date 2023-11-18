@@ -18,21 +18,21 @@ int str_len(char *str)
  * str_cmp - compare two strings
  * @str1: the first string
  * @str2: the second string
+ * @end: the end charachter to stop comparing
  * Return: 1 if str1 equals str2, 0 otherwise
  */
 int str_cmp(char *str1, char *str2, char end)
 {
-	int i =0;
-
+	int i = 0;
 	char *s1 = str1;
 	char *s2 = str2;
+
 	for (i = 0; s2[i] != end; i++)
-		{
-			if (s1[i] != s2[i])
-				return (-1);
-		}
-		return (0);
-	
+	{
+		if (s1[i] != s2[i])
+			return (-1);
+	}
+	return (0);
 }
 
 /**
@@ -40,7 +40,7 @@ int str_cmp(char *str1, char *str2, char end)
  * @src: source string
  * Return: number of copied charachters
  */
-char* str_dup(char *src)
+char *str_dup(char *src)
 {
 	int i = 0;
 	char *dest = NULL;
@@ -68,14 +68,15 @@ char* str_dup(char *src)
  * @src: source string
  * Return: concatenated string
  */
-char* str_cat(char *dest, char *src)
+char *str_cat(char *dest, char *src)
 {
 	int i = 0, j = 0;
+
 	while (dest[i] != '\0')
 		i++;
 	while (src[j] != '\0')
 	{
-		dest[i] = src [j];
+		dest[i] = src[j];
 		i++;
 		j++;
 	}
@@ -86,6 +87,7 @@ char* str_cat(char *dest, char *src)
 /**
  * w_count - counts the number of words in string
  * @str: the string
+ * @delim: the delimiter between words
  * Return: the number of words
  */
 int w_count(char *str, char delim)

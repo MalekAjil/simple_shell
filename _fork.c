@@ -35,8 +35,8 @@ int _fork(char **cmds, char *line, char *path)
 	{
 		es = WEXITSTATUS(stat);
 	}
+	free_cmds(cmds);
 	if (line != NULL)
 		free(line);
-        return (es);
+	return (es);
 }
-

@@ -3,7 +3,6 @@
 /**
  * str_to_words - split the string into words
  * @str: the string
- * @count: words count
  * Return: the words array
  */
 char **str_to_words(char *str)

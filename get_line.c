@@ -1,11 +1,10 @@
 #include "shell.h"
 /*
 * get_line - reads string from the stream
-* 
 * Return: return the line string.
 */
 char *get_line(void)
-{	
+{
 	size_t n = 0;
 	ssize_t c = 0;
 	char *lineptr = NULL;
