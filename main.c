@@ -30,7 +30,6 @@ int main(void)
 			dir = get_path(cmds, PATH);
 			if (builtin(cmds, line) != 0)
 				continue;
-			printf("%s\n", dir);
 			_fork(cmds, line, dir);
 		}
 		else
