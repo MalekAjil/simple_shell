@@ -19,7 +19,7 @@ int main(void)
 		cmds = NULL;
 		if (isatty(0) == 1 && write(1, "($) ", 4) == -1)
 			exit(0);
-		get_line(line);
+		line = get_line();
 		if (*line != '\0')
 		{
 			cmds = str_to_words(line);
@@ -31,6 +31,7 @@ int main(void)
 			dir = get_path(cmds, PATH);
 			if (builtin(cmds, line) != 0)
 				continue;
+			printf("%s\n", dir);
 			_fork(cmds, line, dir);
 		}
 		else

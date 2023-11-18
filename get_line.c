@@ -1,13 +1,14 @@
 #include "shell.h"
 /*
 * get_line - reads string from the stream
-* @lineptr: pointer to the line
-* Return: return number of characters or -1 on failure.
+* 
+* Return: return the line string.
 */
-ssize_t get_line(char *lineptr)
+char *get_line(void)
 {	
 	size_t n = 0;
 	ssize_t c = 0;
+	char *lineptr = NULL;
 
 	c = getline(&lineptr, &n, stdin);
 	if (c == -1)
@@ -27,5 +28,5 @@ ssize_t get_line(char *lineptr)
 			break;
 		}
 	}
-	return (c);
+	return (lineptr);
 }

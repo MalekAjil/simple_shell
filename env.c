@@ -12,8 +12,8 @@ char* get_env(char *name)
 
 	while (environ[i] != NULL)
 	{
-		res = str_cmp(name, environ[i]);
-		if (res)
+		res = str_cmp(name, environ[i], '=');
+		if (!res)
 			return (environ[i]);
 		i++;
 	}		

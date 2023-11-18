@@ -20,22 +20,19 @@ int str_len(char *str)
  * @str2: the second string
  * Return: 1 if str1 equals str2, 0 otherwise
  */
-int str_cmp(char *str1, char *str2)
+int str_cmp(char *str1, char *str2, char end)
 {
-	int n1, n2;
+	int i =0;
 
-	n1 = str_len(str1);
-	n2 = str_len(str2);
-	if (n1 != n2)
+	char *s1 = str1;
+	char *s2 = str2;
+	for (i = 0; s2[i] != end; i++)
+		{
+			if (s1[i] != s2[i])
+				return (-1);
+		}
 		return (0);
-	n1 = 0;
-	while (str1[n1] != '\0')
-	{
-		if (str1[n1] != str2[n1])
-			return (0);
-		n1++;
-	}
-	return (1);
+	
 }
 
 /**
@@ -55,6 +52,7 @@ char* str_dup(char *src)
 	dest = malloc(sizeof(char) * (i + 1));
 	if (dest == NULL)
 		return (NULL);
+	i = 0;
 	while (src[i] != '\0')
 	{
 		dest[i] = src[i];

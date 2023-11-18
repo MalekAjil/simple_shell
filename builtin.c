@@ -8,18 +8,24 @@
  */
 int builtin(char **cmds, char *line)
 {
-	if (str_cmp(cmds[0], "env"))
+	int st = 0;
+
+	if (!str_cmp(cmds[0], "env", '\0'))
 	{
 		print_env();
 		free_cmds(cmds);
 		free(line);
 		return (1);
 	}
-	else if (str_cmp(cmds[0], "exit"))
+	else if (!str_cmp(cmds[0], "exit", '\0'))
 	{
-		free_cmds(cmds);
+		if (cmds[1] != NULL)
+		{
+			st = str_to_num(cmds[1]);
+		}
+		free_cmds(cmds);		
 		free(line);
-		exit(0);
+		exit(st);
 	}
         return (0);
 }

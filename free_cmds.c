@@ -9,10 +9,15 @@ void free_cmds(char **cmds)
 {
 	int i = 0;
 
-	while (cmds[i])
+	if (cmds == NULL)
+		return;
+	while (cmds[i] != NULL)
+		i++;
+	while(cmds[i])
 	{
 		free(cmds[i]);
-		i++;
+		i--;
 	}
-	free(cmds);
+	if (cmds != NULL)
+		free(cmds);
 }
